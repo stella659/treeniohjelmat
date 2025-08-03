@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Uusi julkaisu</title>
+</head>
+
+<body>
+    <h1>Uusi julkaisu</h1>
+  <form action="/create_item" method="post">
+    <p>
+      Treenin nimi: <br />
+      <input type="text" name="title" />
+    </p>
+    <p>
+        Treenin sisältö: <br />
+        <textarea name="description" rows="8" cols="80"></textarea>
+    </p>
+    <p>
+        Kesto: <br />
+        <input type="text" name="duration" size="5" /> viikkoa
+    </p>
+    <p>
+        Intensiivisyys:</p>
+    <p>
+        <input type="radio" name="intensity" value="1" /> matala
+        <input type="radio" name="intensity" value="2" /> keskitaso
+        <input type="radio" name="intensity" value="3" /> korkea
+    </p>
+    <input type="submit" value="Luo julkaisu" />
+  </form>
+</body>
+
+</html>
