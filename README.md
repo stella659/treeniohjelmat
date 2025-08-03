@@ -1,10 +1,10 @@
-# foorumi
+# treeniohjelmat
 
 
   * Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
-  * Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan lisäämiään keskusteluja ja viestejä.
-  * Käyttäjä näkee foorumille lisätyt keskustelut ja viestit (omat ja muiden laittamat).
-  * Käyttäjä pystyy etsimään viestejä ja keskusteluja hakusanalla.
-  * Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja ja käyttäjän lisäämät keskustelut ja viestit.
-  * Käyttäjä pystyy valitsemaan keskustelulle tai viestille yhden tai useamman luokittelun (esim. keskustelulle voi valita aihealueen, viestille voi valita otsikon)
-  * Viesteihin pystyy lisäämään kuvia
+  * Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan lisäämiään treeniohjelmia.
+  * Käyttäjä näkee foorumille lisätyt treeniohjelmat (omat ja muiden laittamat).
+  * Käyttäjä pystyy etsimään treeniohjelmia hakusanalla.
+  * Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja käyttäjän lisäämistä treeniohjelmista.
+  * Käyttäjä pystyy valitsemaan keskustelulle tai viestille yhden tai useamman luokittelun (esim. voimaharjoittelu, cardio, yhdistelmä)
+  * Käyttäjä voi jättää kommenteja ja arvioita treeniohjelmista ja nämä näkyvät myös muille.
