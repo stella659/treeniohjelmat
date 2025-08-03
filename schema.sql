@@ -9,6 +9,6 @@ CREATE TABLE items(
     title TEXT,
     description TEXT,
     duration INTEGER,
-    intensity TEXT,
+    intensity INTEGER,
     user_id INTEGER REFERENCES users
 );
