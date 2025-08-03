@@ -23,6 +23,12 @@
         <a href="/new_item">Uusi julkaisu</a>
     </p>
     <h2>Julkaisut</h2>
+        <u>
+            {% for item in items %}
+            <li><a href="/item/{{ item.id }}" > {{ item.title }}</a></li>
+            {% endfor %}
+        </u>
+
 </body>
 
 </html>
