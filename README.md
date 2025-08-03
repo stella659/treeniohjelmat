@@ -12,11 +12,11 @@ Ohjeet sovelluksen testaamiseen:
 Sovellukseen tarvitsee Pythonia ja tietokantaa
  
 1. Sovelluksen asennus komentotulkilla:
-  git clone https://github.com/kayttaja/treeniohjelmat.git
+  git clone https://github.com/kayttaja/treeniohjelmat.git ja
   cd treeniohjelmat
 
 2.Luo virtuaaliympäristö:
-  python3 -m venv venv
+  python3 -m venv venv ja
   source venv/bin/activate
   
 3.avaa tietokanta:
