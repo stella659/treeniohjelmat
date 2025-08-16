@@ -10,11 +10,11 @@
   <form action="/update_workout" method="post">
     <p>
       Treenin nimi: <br />
-      <input type="text" name="title" value="{{ workout.title }}" />
+      <input type="text" name="title" value="{{ workout.title }}" maxlength="50" required />
     </p>
-    <p>
+    <p>        required
         Treenin sisältö: <br />
-        <textarea name="description" rows="8" cols="80">{{ workout.description }}</textarea>
+        <textarea name="description" rows="8" cols="80" maxlength="1000" required>{{ workout.description }}</textarea>
     </p>
     <p>
         Kesto: <br />

@@ -83,8 +83,14 @@ def update_workout():
         abort(403)
 
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
     duration = request.form["duration"]
+    if not re.search("^[1-9][0-9]{0,2}$", duration):
+        abort(403)
     intensity = request.form["intensity"]
 
     workouts.update_workout(workout_id, title, description, duration, intensity)
