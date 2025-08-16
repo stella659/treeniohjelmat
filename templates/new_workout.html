@@ -10,15 +10,15 @@
   <form action="/create_workout" method="post">
     <p>
       Treenin nimi: <br />
-      <input type="text" name="title" />
+      <input type="text" name="title" maxlength="50" />
     </p>
     <p>
         Treenin sisältö: <br />
-        <textarea name="description" rows="8" cols="80"></textarea>
+        <textarea name="description" rows="8" cols="80" maxlength="1000" required></textarea>
     </p>
     <p>
         Kesto: <br />
-        <input type="text" name="duration" size="5" /> viikkoa
+        <input type="text" name="duration" size="5" pattern="[1-9][0-9]{0,2}" required/> viikkoa
     </p>
     <p>
         Intensiivisyys:</p>

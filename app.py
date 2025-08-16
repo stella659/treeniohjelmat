@@ -5,6 +5,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
 import workouts
+import re
 
 
 app = Flask(__name__)
@@ -44,9 +45,16 @@ def new_workout():
 @app.route("/create_workout", methods=["POST"])
 def create_workout():
     require_login()
+
     title = request.form["title"]
+    if not title or len(title) > 50:
+        abort(403)
     description = request.form["description"]
+    if not description or len(description) > 1000:
+        abort(403)
     duration = request.form["duration"]
+    if not re.search("^[1-9][0-9]{0,2}$", duration):
+        abort(403)
     intensity = request.form["intensity"]
     user_id = session["user_id"]
 
