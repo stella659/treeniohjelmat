@@ -4,7 +4,7 @@ CREATE TABLE users (
     password_hash TEXT
 );
 
-CREATE TABLE items(
+CREATE TABLE workouts(
     id INTEGER PRIMARY KEY,
     title TEXT,
     description TEXT,
