@@ -12,23 +12,17 @@ Ohjeet sovelluksen testaamiseen:
 Sovellukseen tarvitsee Pythonia ja tietokantaa
  
 1. Sovelluksen asennus komentotulkilla:
-  git clone https://github.com/kayttaja/treeniohjelmat.git ja
+  git clone https://github.com/stella659/treeniohjelmat.git ja
   cd treeniohjelmat
 
 2.Luo virtuaaliympäristö:
   python3 -m venv venv ja
   source venv/bin/activate
   
-3.avaa tietokanta:
-  sqlite3 database.db
-  
-4.Kirjoita tietokantaan:
+4.Luo tietokanta:
   sqlite3 database.db < schema.sql
   
-5.poistu tietokannasta:
-  .quit
-  
-6.Virtuaaliympäristössä(venv):
+6.Käynnistä flask virtuaaliympäristössä(venv):
  flask run
   
-7. siirry komennon antamalle http sivustolle selaimessa ja testaa sovellusta
+7. Siirry komennon antamalle http sivustolle selaimessa ja testaa sovellusta
