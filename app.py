@@ -10,6 +10,10 @@ import workouts
 app = Flask(__name__)
 app.secret_key = config.secret_key
 
+def require_login():
+    if "user_id" not in session:
+        abort(403)
+
 @app.route("/")
 def index():
     all_workouts = workouts.get_workouts()
@@ -34,10 +38,12 @@ def show_workout(workout_id):
 
 @app.route("/new_workout")
 def new_workout():
+    require_login()
     return render_template("new_workout.html")
 
 @app.route("/create_workout", methods=["POST"])
 def create_workout():
+    require_login()
     title = request.form["title"]
     description = request.form["description"]
     duration = request.form["duration"]
@@ -50,6 +56,7 @@ def create_workout():
 
 @app.route("/edit_workout/<int:workout_id>")
 def edit_workout(workout_id):
+    require_login()
     workout = workouts.get_workout(workout_id)
     if not workout:
         abort(404)
@@ -59,8 +66,11 @@ def edit_workout(workout_id):
 
 @app.route("/update_workout", methods=["POST"])
 def update_workout():
+    require_login()
     workout_id = request.form["workout_id"]
     workout = workouts.get_workout(workout_id)
+    if not workout:
+        abort(404)
     if workout["user_id"] != session["user_id"]:
         abort(403)
 
@@ -75,7 +85,10 @@ def update_workout():
 
 @app.route("/remove_workout/<int:workout_id>", methods=["GET", "POST"])
 def remove_workout(workout_id):
+    require_login()
     workout = workouts.get_workout(workout_id)
+    if not workout:
+        abort(404)
     if workout["user_id"] != session["user_id"]:
         abort(403)
 
@@ -133,6 +146,7 @@ def login():
 
 @app.route("/logout")
 def logout():
-    del session["user_id"]
-    del session["username"]
+    if "user_id" in session:
+        del session["user_id"]
+        del session["username"]
     return redirect("/")
