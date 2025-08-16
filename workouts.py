@@ -20,7 +20,8 @@ def get_workout(workout_id):
             FROM workouts, users
             WHERE workouts.user_id = users.id AND
                 workouts.id = ?"""
-    return db.query(sql, [workout_id])[0]
+    result = db.query(sql, [workout_id])
+    return result[0] if result else None
 
 def update_workout(workout_id, title, description, duration, intensity):
     sql = """UPDATE workouts SET title = ?,

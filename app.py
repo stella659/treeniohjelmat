@@ -28,6 +28,8 @@ def find_workout():
 @app.route("/workout/<int:workout_id>")
 def show_workout(workout_id):
     workout = workouts.get_workout(workout_id)
+    if not workout:
+        abort(404)
     return render_template("show_workout.html", workout=workout)
 
 @app.route("/new_workout")
@@ -49,6 +51,8 @@ def create_workout():
 @app.route("/edit_workout/<int:workout_id>")
 def edit_workout(workout_id):
     workout = workouts.get_workout(workout_id)
+    if not workout:
+        abort(404)
     if workout["user_id"] != session["user_id"]:
         abort(403)
     return render_template("edit_workout.html", workout=workout)
