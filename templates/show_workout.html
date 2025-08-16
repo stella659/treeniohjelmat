@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{ workout.title }}</title>
+</head>
+
+<body>
+    <h1>{{ workout.title }}</h1>
+    {% if session.user_id == workout.user_id %}
+    <p>
+        <a href="/edit_workout/{{ workout.id }}">Muokkaa</a>
+        <a href="/remove_workout/{{ workout.id }}">Poista</a>
+    </p>
+    {% endif %}
+    <p>
+        {{ workout.description }}
+    </p>
+    <p>
+        Kesto: {{ workout.duration }} viikkoa
+    </p>
+    <p>
+        Intensiivisyys: {{ workout.intensity }}
+    </p>
+    <p>
+        Julkaisija: {{ workout.username }}
+    </p>
+    <p>
+        <a href="/">Takaisin</a>
+    </p>
+</body>
+
+</html>

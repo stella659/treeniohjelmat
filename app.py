@@ -4,7 +4,7 @@ from flask import abort, redirect, render_template, request, session
 from werkzeug.security import check_password_hash, generate_password_hash
 import config
 import db
-import items
+import workouts
 
 
 app = Flask(__name__)
@@ -12,52 +12,52 @@ app.secret_key = config.secret_key
 
 @app.route("/")
 def index():
-    all_items = items.get_items()
-    return render_template("index.html", items=all_items)
+    all_workouts = workouts.get_workouts()
+    return render_template("index.html", workouts=all_workouts)
 
-@app.route("/find_item")
-def find_item():
+@app.route("/find_workout")
+def find_workout():
     query = request.args.get("query")
     if query:
-        results = items.find_items(query)
+        results = workouts.find_workouts(query)
     else:
         query = ""
         results = []
-    return render_template("find_item.html", query=query, results=results)
+    return render_template("find_workout.html", query=query, results=results)
 
-@app.route("/item/<int:item_id>")
-def show_item(item_id):
-    item = items.get_item(item_id)
-    return render_template("show_item.html", item=item)
+@app.route("/workout/<int:workout_id>")
+def show_workout(workout_id):
+    workout = workouts.get_workout(workout_id)
+    return render_template("show_workout.html", workout=workout)
 
-@app.route("/new_item")
-def new_item():
-    return render_template("new_item.html")
+@app.route("/new_workout")
+def new_workout():
+    return render_template("new_workout.html")
 
-@app.route("/create_item", methods=["POST"])
-def create_item():
+@app.route("/create_workout", methods=["POST"])
+def create_workout():
     title = request.form["title"]
     description = request.form["description"]
     duration = request.form["duration"]
     intensity = request.form["intensity"]
     user_id = session["user_id"]
 
-    items.add_item(title, description, duration, intensity, user_id)
+    workouts.add_workout(title, description, duration, intensity, user_id)
 
     return redirect("/")
 
-@app.route("/edit_item/<int:item_id>")
-def edit_item(item_id):
-    item = items.get_item(item_id)
-    if item["user_id"] != session["user_id"]:
+@app.route("/edit_workout/<int:workout_id>")
+def edit_workout(workout_id):
+    workout = workouts.get_workout(workout_id)
+    if workout["user_id"] != session["user_id"]:
         abort(403)
-    return render_template("edit_item.html", item=item)
+    return render_template("edit_workout.html", workout=workout)
 
-@app.route("/update_item", methods=["POST"])
-def update_item():
-    item_id = request.form["item_id"]
-    item = items.get_item(item_id)
-    if item["user_id"] != session["user_id"]:
+@app.route("/update_workout", methods=["POST"])
+def update_workout():
+    workout_id = request.form["workout_id"]
+    workout = workouts.get_workout(workout_id)
+    if workout["user_id"] != session["user_id"]:
         abort(403)
 
     title = request.form["title"]
@@ -65,25 +65,25 @@ def update_item():
     duration = request.form["duration"]
     intensity = request.form["intensity"]
 
-    items.update_item(item_id, title, description, duration, intensity)
+    workouts.update_workout(workout_id, title, description, duration, intensity)
 
-    return redirect("/item/" + str(item_id))
+    return redirect("/workout/" + str(workout_id))
 
-@app.route("/remove_item/<int:item_id>", methods=["GET", "POST"])
-def remove_item(item_id):
-    item = items.get_item(item_id)
-    if item["user_id"] != session["user_id"]:
+@app.route("/remove_workout/<int:workout_id>", methods=["GET", "POST"])
+def remove_workout(workout_id):
+    workout = workouts.get_workout(workout_id)
+    if workout["user_id"] != session["user_id"]:
         abort(403)
 
     if request.method == "GET":
-        return render_template("remove_item.html", item=item)
+        return render_template("remove_workout.html", workout=workout)
 
     if request.method == "POST":
         if "remove" in request.form:
-            items.remove_item(item_id)
+            workouts.remove_workout(workout_id)
             return redirect("/")
         else:
-            return redirect("/item/" + str(item_id))
+            return redirect("/workout/" + str(workout_id))
 
 
 @app.route("/register")
