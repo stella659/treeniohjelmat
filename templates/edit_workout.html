@@ -21,7 +21,22 @@
         <input type="text" name="duration" size="5" value="{{ workout.duration }}" /> viikkoa
     </p>
     <input type="hidden" name="workout_id" value="{{ workout.id }}" />
-    <input type="submit" value="Päivitä julkaisua" />
+    {% for class in all_classes %}
+    <p>
+      {{ class }} <br />
+      <select name="classes">
+        <option value="">{valitse}</option>
+      {% for option in all_classes[class] %}
+      {% if classes[class] == option %}
+        <option value="{{ class }}:{{ option }}" selected>{{ option }}</option>
+        {% else %}
+        <option value="{{ class }}:{{ option }}">{{ option }}</option>
+        {% endif %}
+      {% endfor %}
+      </select>
+    </p>
+    {% endfor%}
+    <input type="submit" value="Päivitä treeniä" />
   </form>
   <p>
     <a href="/workout/{{ workout.id }}">Takaisin</a>

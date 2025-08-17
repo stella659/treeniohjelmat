@@ -85,7 +85,16 @@ def edit_workout(workout_id):
         abort(404)
     if workout["user_id"] != session["user_id"]:
         abort(403)
-    return render_template("edit_workout.html", workout=workout)
+
+    all_classes = workouts.get_all_classes()
+    classes = {}
+    for my_class in all_classes:
+        classes[my_class] = ""
+    for entry in workouts.get_classes(workout_id):
+        classes[entry["title"]] = entry["value"]
+
+    return render_template("edit_workout.html", workout=workout, classes=classes,
+    all_classes=all_classes)
 
 @app.route("/update_workout", methods=["POST"])
 def update_workout():
@@ -106,9 +115,14 @@ def update_workout():
     duration = request.form["duration"]
     if not re.search("^[1-9][0-9]{0,2}$", duration):
         abort(403)
-    intensity = request.form["intensity"]
 
-    workouts.update_workout(workout_id, title, description, duration)
+    classes = []
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
+
+    workouts.update_workout(workout_id, title, description, duration, classes)
 
     return redirect("/workout/" + str(workout_id))
 
