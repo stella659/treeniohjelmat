@@ -21,11 +21,22 @@
         <input type="text" name="duration" size="5" pattern="[1-9][0-9]{0,2}" required/> viikkoa
     </p>
     <p>
-        Intensiivisyys:</p>
+        Intensiivisyys: <br />
+        <select name="intensity">
+          <option value="">{valitse}</option>
+          <option value="matala">matala</option>
+          <option value="keskitaso">keskitaso</option>
+          <option value="korkea">korkea</option>
+        </select>
+    </p>
     <p>
-        <input type="radio" name="intensity" value="1" /> matala
-        <input type="radio" name="intensity" value="2" /> keskitaso
-        <input type="radio" name="intensity" value="3" /> korkea
+      Treenin tyyppi: <br />
+      <select name="type">
+        <option value="">{valitse}</option>
+        <option value="cardio">cardio</option>
+        <option value="voimaharjoittelu">voimaharjoittelu</option>
+        <option value="yhdistelmä">yhdistelmä</option>
+      </select>
     </p>
     <input type="submit" value="Luo julkaisu" />
   </form>

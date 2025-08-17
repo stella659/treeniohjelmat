@@ -20,11 +20,17 @@
         Kesto: {{ workout.duration }} viikkoa
     </p>
     <p>
-        Intensiivisyys: {{ workout.intensity }}
-    </p>
-    <p>
         Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a>
     </p>
+        {% if classes %}
+
+    <p>Luokat:</p>
+        <ul>
+            {% for class in classes %}
+            <li>{{ class.title}}: {{ class.value }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
     <p>
         <a href="/">Takaisin</a>
     </p>

@@ -20,13 +20,6 @@
         Kesto: <br />
         <input type="text" name="duration" size="5" value="{{ workout.duration }}" /> viikkoa
     </p>
-    <p>
-        Intensiivisyys:</p>
-    <p>
-        <input type="radio" name="intensity" value="1" {% if workout.intensity == 1 %}checked{% endif %} /> matala 
-        <input type="radio" name="intensity" value="2" {% if workout.intensity == 2 %}checked{% endif %} /> keskitaso
-        <input type="radio" name="intensity" value="3" {% if workout.intensity == 3 %}checked{% endif %} /> korkea
-    </p>
     <input type="hidden" name="workout_id" value="{{ workout.id }}" />
     <input type="submit" value="Päivitä julkaisua" />
   </form>

@@ -43,7 +43,8 @@ def show_workout(workout_id):
     workout = workouts.get_workout(workout_id)
     if not workout:
         abort(404)
-    return render_template("show_workout.html", workout=workout)
+    classes = workouts.get_classes(workout_id)
+    return render_template("show_workout.html", workout=workout, classes=classes)
 
 @app.route("/new_workout")
 def new_workout():
@@ -63,10 +64,17 @@ def create_workout():
     duration = request.form["duration"]
     if not re.search("^[1-9][0-9]{0,2}$", duration):
         abort(403)
-    intensity = request.form["intensity"]
     user_id = session["user_id"]
 
-    workouts.add_workout(title, description, duration, intensity, user_id)
+    classes = []
+    intensity = request.form["intensity"]
+    if intensity:
+        classes.append(("Intensiivisyys", intensity))
+    type = request.form["type"]
+    if type:
+        classes.append(("Treenin tyyppi", type))
+
+    workouts.add_workout(title, description, duration, user_id, classes)
 
     return redirect("/")
 
@@ -101,7 +109,7 @@ def update_workout():
         abort(403)
     intensity = request.form["intensity"]
 
-    workouts.update_workout(workout_id, title, description, duration, intensity)
+    workouts.update_workout(workout_id, title, description, duration)
 
     return redirect("/workout/" + str(workout_id))
 
@@ -142,8 +150,7 @@ def create():
     except sqlite3.IntegrityError:
         return "VIRHE: tunnus on jo varattu"
 
-    return "Tunnus luotu"
-    #redirect("/login")
+    return redirect("/login")
 
 
 @app.route("/login", methods=["GET", "POST"])

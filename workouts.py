@@ -1,20 +1,29 @@
 import db
 
-def add_workout(title, description, duration, intensity, user_id):
-    sql = """INSERT INTO workouts (title, description, duration, intensity, user_id)
-            VALUES (?, ?, ?, ?, ?)"""
-    db.execute(sql,[title, description, duration, intensity, user_id])
+def add_workout(title, description, duration, user_id, classes):
+    sql = """INSERT INTO workouts (title, description, duration, user_id)
+            VALUES (?, ?, ?, ?)"""
+    db.execute(sql,[title, description, duration, user_id])
+
+    workout_id = db.last_insert_id()
+
+    sql = "INSERT INTO workout_classes (workout_id, title, value) VALUES (?, ?, ?)"
+    for class_title, value in classes:
+        db.execute(sql, [workout_id, class_title, value])
 
 def get_workouts():
     sql = "SELECT id, title FROM workouts ORDER BY id DESC"
     return db.query(sql)
+
+def get_classes(workout_id):
+    sql = "SELECT title, value FROM workout_classes WHERE workout_id = ?"
+    return db.query(sql, [workout_id])
 
 def get_workout(workout_id):
     sql = """SELECT workouts.id,
                     workouts.title,
                     workouts.description,
                     workouts.duration,
-                    workouts.intensity,
                     users.id user_id,
                     users.username
             FROM workouts, users
@@ -23,13 +32,12 @@ def get_workout(workout_id):
     result = db.query(sql, [workout_id])
     return result[0] if result else None
 
-def update_workout(workout_id, title, description, duration, intensity):
+def update_workout(workout_id, title, description, duration):
     sql = """UPDATE workouts SET title = ?,
                             description = ?,
-                            duration = ?,
-                            intensity = ?
+                            duration = ?
                         WHERE id = ?"""
-    db.execute(sql, [title, description, duration, intensity, workout_id])
+    db.execute(sql, [title, description, duration, workout_id])
 
 def remove_workout(workout_id):
     sql = "DELETE FROM workouts WHERE id = ?"
