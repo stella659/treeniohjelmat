@@ -6,6 +6,7 @@ import config
 import db
 import workouts
 import re
+import users
 
 
 app = Flask(__name__)
@@ -19,6 +20,14 @@ def require_login():
 def index():
     all_workouts = workouts.get_workouts()
     return render_template("index.html", workouts=all_workouts)
+
+@app.route("/user/<int:user_id>")
+def show_user(user_id):
+    user = users.get_user(user_id)
+    if not user:
+        abort(404)
+    workouts = users.get_workouts(user_id)
+    return render_template("show_user.html", user=user, workouts=workouts)
 
 @app.route("/find_workout")
 def find_workout():

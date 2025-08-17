@@ -23,7 +23,7 @@
         Intensiivisyys: {{ workout.intensity }}
     </p>
     <p>
-        Julkaisija: {{ workout.username }}
+        Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a> 
     </p>
     <p>
         <a href="/">Takaisin</a>
