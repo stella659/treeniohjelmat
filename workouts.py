@@ -1,5 +1,16 @@
 import db
 
+def get_all_classes():
+    sql = "SELECT title, value FROM classes ORDER BY id"
+    result = db.query(sql)
+
+    classes = {}
+    for title, value in result:
+        classes[title] = []
+    for title, value in result:
+        classes[title].append(value)
+    return classes
+
 def add_workout(title, description, duration, user_id, classes):
     sql = """INSERT INTO workouts (title, description, duration, user_id)
             VALUES (?, ?, ?, ?)"""

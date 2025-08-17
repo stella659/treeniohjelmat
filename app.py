@@ -49,7 +49,8 @@ def show_workout(workout_id):
 @app.route("/new_workout")
 def new_workout():
     require_login()
-    return render_template("new_workout.html")
+    classes = workouts.get_all_classes()
+    return render_template("new_workout.html", classes=classes)
 
 @app.route("/create_workout", methods=["POST"])
 def create_workout():
@@ -67,12 +68,10 @@ def create_workout():
     user_id = session["user_id"]
 
     classes = []
-    intensity = request.form["intensity"]
-    if intensity:
-        classes.append(("Intensiivisyys", intensity))
-    type = request.form["type"]
-    if type:
-        classes.append(("Treenin tyyppi", type))
+    for entry in request.form.getlist("classes"):
+        if entry:
+            parts = entry.split(":")
+            classes.append((parts[0], parts[1]))
 
     workouts.add_workout(title, description, duration, user_id, classes)
 
