@@ -1,11 +1,13 @@
+import re
 import secrets
 import sqlite3
+
 from flask import Flask
 from flask import abort, flash, redirect, render_template, request, session
+
 import config
 import db
 import workouts
-import re
 import users
 
 
