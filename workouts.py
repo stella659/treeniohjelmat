@@ -6,14 +6,14 @@ def get_all_classes():
 
     classes = {}
     for title, value in result:
-        classes[title] = []
-    for title, value in result:
+        if title not in classes:
+            classes[title] = []
         classes[title].append(value)
     return classes
 
 def add_workout(title, description, duration, user_id, classes):
     sql = """INSERT INTO workouts (title, description, duration, user_id)
-            VALUES (?, ?, ?, ?)"""
+             VALUES (?, ?, ?, ?)"""
     db.execute(sql,[title, description, duration, user_id])
 
     workout_id = db.last_insert_id()
@@ -23,24 +23,24 @@ def add_workout(title, description, duration, user_id, classes):
         db.execute(sql, [workout_id, title, value])
 
 def add_evaluation(workout_id, user_id, evaluation):
-    print("DEBUG: Trying to add evaluation")
-    print("workout_id:", workout_id)
-    print("user_id:", user_id)
-    print("evaluation:", evaluation)
-
     sql = """INSERT INTO evaluations (workout_id, user_id, evaluation)
             VALUES (?, ?, ?)"""
     db.execute(sql,[workout_id, user_id, evaluation])
 
 def get_workouts():
-    sql = "SELECT id, title FROM workouts ORDER BY id DESC"
+    sql = """SELECT workouts.id, workouts.title, users.id user_id, users.username,
+                    COUNT(evaluations.id) evaluation_count
+             FROM workouts JOIN users ON workouts.user_id = users.id
+                           LEFT JOIN evaluations ON workouts.id = evaluations.workout_id
+             GROUP BY workouts.id
+             ORDER BY workouts.id DESC"""
     return db.query(sql)
 
 def get_evaluations(workout_id):
-    sql = """SELECT evaluations.evaluation, users.id user_id, users.username
-            FROM evaluations, users
-            WHERE evaluations.workout_id = ? AND evaluations.user_id = users.id
-            ORDER BY evaluations.id DESC"""
+    sql = """SELECT evaluations.evaluation, users.id, users.username
+             FROM evaluations, users
+             WHERE evaluations.workout_id = ? AND evaluations.user_id = users.id
+             ORDER BY evaluations.id DESC"""
     return db.query(sql, [workout_id])
 
 def get_classes(workout_id):
@@ -54,8 +54,8 @@ def get_workout(workout_id):
                     workouts.duration,
                     users.id user_id,
                     users.username
-            FROM workouts, users
-            WHERE workouts.user_id = users.id AND
+             FROM workouts, users
+             WHERE workouts.user_id = users.id AND
                 workouts.id = ?"""
     result = db.query(sql, [workout_id])
     return result[0] if result else None
@@ -64,7 +64,7 @@ def update_workout(workout_id, title, description, duration, classes):
     sql = """UPDATE workouts SET title = ?,
                             description = ?,
                             duration = ?
-                        WHERE id = ?"""
+             WHERE id = ?"""
     db.execute(sql, [title, description, duration, workout_id])
 
     sql = "DELETE FROM workout_classes WHERE workout_id = ?"

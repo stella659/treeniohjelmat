@@ -13,7 +13,7 @@ CREATE TABLE workouts(
 );
 
 CREATE TABLE evaluations (
-    id INTEGER REFERENCES workouts,
+    id INTEGER PRIMARY KEY,
     user_id INTEGER REFERENCES users,
     workout_id INTEGER REFERENCES workouts,
     evaluation INTEGER
@@ -21,7 +21,12 @@ CREATE TABLE evaluations (
 
 CREATE TABLE classes(
     id INTEGER PRIMARY KEY,
-    title TEXT,
+    title TEXT,CREATE TABLE evaluations (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER REFERENCES users,
+    workout_id INTEGER REFERENCES workouts,
+    evaluation INTEGER
+);
     value TEXT
 );
 
