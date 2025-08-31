@@ -91,9 +91,7 @@ def create_workout():
                 abort(403)
             classes.append((parts[0], parts[1]))
 
-    workouts.add_workout(title, description, duration, user_id, classes)
-
-    workout_id = db.last_insert_id()
+    workout_id = workouts.add_workout(title, description, duration, user_id, classes)
     return redirect("/workout/" + str(workout_id))
 
 @app.route("/create_evaluation", methods=["POST"])
@@ -164,7 +162,7 @@ def update_workout():
                 abort(403)
             classes.append((parts[0], parts[1]))
 
-    workouts.update_workout(workout_id, title, description, duration, classes)
+    workout_id = workouts.update_workout(workout_id, title, description, duration, classes)
 
     return redirect("/workout/" + str(workout_id))
 

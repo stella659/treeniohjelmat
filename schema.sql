@@ -21,12 +21,7 @@ CREATE TABLE evaluations (
 
 CREATE TABLE classes(
     id INTEGER PRIMARY KEY,
-    title TEXT,CREATE TABLE evaluations (
-    id INTEGER PRIMARY KEY,
-    user_id INTEGER REFERENCES users,
-    workout_id INTEGER REFERENCES workouts,
-    evaluation INTEGER
-);
+    title TEXT,
     value TEXT
 );
 

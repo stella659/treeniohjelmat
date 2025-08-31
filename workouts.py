@@ -22,6 +22,8 @@ def add_workout(title, description, duration, user_id, classes):
     for class_title, class_value in classes:
         db.execute(sql, [workout_id, class_title, class_value])
 
+    return workout_id
+
 def add_evaluation(workout_id, user_id, evaluation):
     sql = """INSERT INTO evaluations (workout_id, user_id, evaluation)
             VALUES (?, ?, ?)"""
