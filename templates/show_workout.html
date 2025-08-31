@@ -36,6 +36,7 @@
 <form action="/create_evaluation" method="post">
     <textarea name="evaluation" rows="4" cols="40" maxlength="1000" required></textarea>
     <input type="hidden" name="workout_id" value="{{ workout.id }}" />
+    <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="Lähetä" />
 </form>
 {% endif %}

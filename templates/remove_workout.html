@@ -8,6 +8,7 @@
 <p>Treeni: <a href="/workout/{{ workout.id }}">{{ workout.title }}</a></p>
 <p>Haluatko varmasti poistaa tämän treenin?</p>
 <form action="/remove_workout/{{ workout.id }}" method="post">
+  <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" name="remove" value="Poista treeni">
   <input type="submit" name="back" value="Palaa takaisin">
 </form>
