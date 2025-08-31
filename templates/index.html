@@ -5,9 +5,11 @@
 {% block content %}
 <h2>Treenit</h2>
 
-<ul>
-    {% for workout in workouts %}
-    <li><a href="/workout/{{ workout.id }}" > {{ workout.title }}</a></li>
-    {% endfor %}
-</ul>
+{% for workout in workouts %}
+<div class="workout">
+<a href="/workout/{{ workout.id }}" > {{ workout.title }}</a> <br />
+Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a><br />
+Arvioiden määrä: {{ workout.evaluation_count }}
+</div>
+{% endfor %}
 {% endblock %}
