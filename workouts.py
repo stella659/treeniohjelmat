@@ -19,8 +19,8 @@ def add_workout(title, description, duration, user_id, classes):
     workout_id = db.last_insert_id()
 
     sql = "INSERT INTO workout_classes (workout_id, title, value) VALUES (?, ?, ?)"
-    for title, value in classes:
-        db.execute(sql, [workout_id, title, value])
+    for class_title, class_value in classes:
+        db.execute(sql, [workout_id, class_title, class_value])
 
 def add_evaluation(workout_id, user_id, evaluation):
     sql = """INSERT INTO evaluations (workout_id, user_id, evaluation)
@@ -71,8 +71,8 @@ def update_workout(workout_id, title, description, duration, classes):
     db.execute(sql, [workout_id])
 
     sql = "INSERT INTO workout_classes (workout_id, title, value) VALUES (?, ?, ?)"
-    for title, value in classes:
-        db.execute(sql, [workout_id, title, value])
+    for class_title, class_value in classes:
+        db.execute(sql, [workout_id, class_title, class_value])
 
 
 def remove_workout(workout_id):

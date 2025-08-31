@@ -54,7 +54,8 @@ def show_workout(workout_id):
         abort(404)
     classes = workouts.get_classes(workout_id)
     evaluations = workouts.get_evaluations(workout_id)
-    return render_template("show_workout.html", workout=workout, classes=classes, evaluations=evaluations)
+    return render_template("show_workout.html", workout=workout,
+                           classes=classes, evaluations=evaluations)
 
 @app.route("/new_workout")
 def new_workout():
@@ -185,8 +186,7 @@ def remove_workout(workout_id):
         if "remove" in request.form:
             workouts.remove_workout(workout_id)
             return redirect("/")
-        else:
-            return redirect("/workout/" + str(workout_id))
+    return redirect("/workout/" + str(workout_id))
 
 
 @app.route("/register")
@@ -201,7 +201,7 @@ def create():
     if password1 != password2:
         flash("VIRHE: salasanat eivät ole samat")
         return redirect("/register")
-    
+
     try:
         users.create_user(username, password1)
     except sqlite3.IntegrityError:
