@@ -3,6 +3,7 @@
 {% block title %}Kirjaudu sisään{% endblock %}
 
 {% block content %}
+<div class="content">
 <h2>Kirjaudu sisään</h2>
 <form action="/login" method="post">
   <p>
@@ -14,5 +15,6 @@
     <input type="password" name="password" />
   </p>
   <input type="submit" value="Kirjaudu" />
+</div>
 </form>
 {% endblock %}

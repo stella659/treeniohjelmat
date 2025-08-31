@@ -3,6 +3,7 @@
 {% block title %}Käyttäjä {{ user.username }}{% endblock %}
 
 {% block content %}
+<div class="content">
   <h2>Käyttäjä {{ user.username }}</h2>
   <p>
     Käyttäjällä on yhteensä {{ workouts | count }} treeniä.
@@ -13,4 +14,5 @@
     <li><a href="/workout/{{ workout.id }}">{{ workout.title }}</a></li>
     {% endfor %}
   </ul>
+</div>
 {% endblock %}

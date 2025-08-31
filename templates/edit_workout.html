@@ -3,6 +3,7 @@
 {% block title %}Treenin muokkaus{% endblock %}
 
 {% block content %}
+<div class="content">
 <h2>{{ workout.title }}</h2>
 <h3>Treenin muokkaus</h3>
 <form action="/update_workout" method="post">
@@ -37,6 +38,7 @@
   {% endfor%}
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Päivitä treeniä" />
+</div>
 </form>
 <p>
   <a href="/workout/{{ workout.id }}">Takaisin treeniin</a>

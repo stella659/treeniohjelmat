@@ -3,16 +3,13 @@
 {% block title %}{{ workout.title }}{% endblock %}
 
 {% block content %}
+<div class="content">
 <h2>{{ workout.title }}</h2>
 {% if session.user_id == workout.user_id %}
-<p>
     <a href="/edit_workout/{{ workout.id }}">Muokkaa</a>
     <a href="/remove_workout/{{ workout.id }}">Poista</a>
-</p>
 {% endif %}
-<p>
-    {{ workout.description }}
-</p>
+<p>{{ workout.description }}</p>
 <ul>
     <li>Kesto: {{ workout.duration }} viikkoa</li>
     <li>Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a></li>
@@ -38,6 +35,7 @@
     <input type="hidden" name="workout_id" value="{{ workout.id }}" />
     <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
     <input type="submit" value="Lähetä" />
+</div>
 </form>
 {% endif %}
 {% endblock %}

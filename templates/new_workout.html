@@ -3,6 +3,7 @@
 {% block title %}Uusi treeniohjelma{% endblock %}
 
 {% block content %}
+<div class="content">
 <h2>Uusi julkaisu</h2>
 <form action="/create_workout" method="post">
   <p>
@@ -30,5 +31,6 @@
   {% endfor %}
   <input type="hidden" name="csrf_token" value="{{ session.csrf_token }}" />
   <input type="submit" value="Luo treeni" />
+</div>
 </form>
 {% endblock %}

@@ -7,26 +7,29 @@
 </head>
 
 <body>
-    <h1>Treeniohjelmat</h1>
-
+    <div class="header">
+        <h1>Treeniohjelmat</h1>
+    </div>
     {% if session.user_id %}
     <p>
         Olet kirjautunut nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
     </p>
     {% endif %}
-
-    <p>
-        <a href="/">Etusivu</a> |
-        <a href="/find_workout">Etsi treeni</a> |
-    {% if session.user_id %}
-        <a href="/new_workout">Uusi treeni</a> |
-        <a href="/logout">Kirjaudu ulos</a>
-    {% else %}
-        <a href="/login">Kirjaudu sisään</a> |
-        <a href="/register">Luo tunnus</a>
-    {% endif %}
-    </p>
-
+    <div class="nav">
+        <nav>
+            <ul>
+                <li><a href="/">Etusivu</a></li>
+                <li><a href="/find_workout">Etsi treeni</a></li>
+                {% if session.user_id %}
+                <li><a href="/new_workout">Uusi treeni</a></li>
+                <li><a href="/logout">Kirjaudu ulos</a></li>
+                {% else %}
+                <li><a href="/login">Kirjaudu sisään</a></li>
+                <li><a href="/register">Luo tunnus</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
     {% for message in get_flashed_messages() %}
     <div class="info">
         {{ message }}
