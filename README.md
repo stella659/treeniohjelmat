@@ -1,28 +1,26 @@
-# treeniohjelmat
-Sovelluksen idea:
+# Treeniohjelmat
+## Sovelluksen toiminnot
+
   * Käyttäjä pystyy luomaan tunnuksen ja kirjautumaan sisään sovellukseen.
-  * Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan lisäämiään treeniohjelmia.
-  * Käyttäjä näkee sovellukseen lisätyt treeniohjelmat (omat ja muiden laittamat).
+  * Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan treeniohjelmia.
+  * Käyttäjä näkee sovellukseen lisätyt treeniohjelmat.
   * Käyttäjä pystyy etsimään treeniohjelmia hakusanalla.
   * Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja käyttäjän lisäämistä treeniohjelmista.
-  * Käyttäjä pystyy valitsemaan treenille yhden tai useamman luokittelun (esim. voimaharjoittelu, cardio, yhdistelmä)
-  * Käyttäjä voi jättää kommentteja ja arvioita treeniohjelmista ja nämä näkyvät myös muille. (kesken)
+  * Käyttäjä pystyy valitsemaan treenille yhden tai useamman luokittelun Esim. intensiteetin tai tyypin.
+  * Käyttäjä voi jättää kommentteja ja arvioita treeniohjelmista.
 
-Ohjeet sovelluksen testaamiseen:
-Sovellukseen tarvitsee Pythonia ja tietokantaa
- 
-1. Sovelluksen asennus komentotulkilla:
-  git clone https://github.com/stella659/treeniohjelmat.git ja
-  cd treeniohjelmat
+## Sovelluksen asennus
 
-2.Luo virtuaaliympäristö:
-  python3 -m venv venv ja
-  source venv/bin/activate
-  
-4.Luo tietokanta:
-  sqlite3 database.db < schema.sql
-  
-6.Käynnistä flask virtuaaliympäristössä(venv):
- flask run
-  
-7. Siirry komennon antamalle http sivustolle selaimessa ja testaa sovellusta
+Asenna `flask`-kirjasto
+```
+$ pip install flask
+```
+Luo tietokannan taulut ja lisää alkutiedot:
+``` 
+$ sqlite3 database.db < schema.sql
+$ sqlite3 database.db < init.sql
+```
+Käynnistä sovellus:
+```
+$ flask run
+``` 
