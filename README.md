@@ -4,9 +4,9 @@ Sovelluksen idea:
   * Käyttäjä pystyy lisäämään, muokkaamaan ja poistamaan lisäämiään treeniohjelmia.
   * Käyttäjä näkee sovellukseen lisätyt treeniohjelmat (omat ja muiden laittamat).
   * Käyttäjä pystyy etsimään treeniohjelmia hakusanalla.
-  * Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja käyttäjän lisäämistä treeniohjelmista. (kesken)
-  * Käyttäjä pystyy valitsemaan keskustelulle tai viestille yhden tai useamman luokittelun (esim. voimaharjoittelu, cardio, yhdistelmä) (kesken)
-  * Käyttäjä voi jättää kommenteja ja arvioita treeniohjelmista ja nämä näkyvät myös muille. (kesken)
+  * Sovelluksessa on käyttäjäsivut, jotka näyttävät tilastoja käyttäjän lisäämistä treeniohjelmista.
+  * Käyttäjä pystyy valitsemaan treenille yhden tai useamman luokittelun (esim. voimaharjoittelu, cardio, yhdistelmä)
+  * Käyttäjä voi jättää kommentteja ja arvioita treeniohjelmista ja nämä näkyvät myös muille. (kesken)
 
 Ohjeet sovelluksen testaamiseen:
 Sovellukseen tarvitsee Pythonia ja tietokantaa
