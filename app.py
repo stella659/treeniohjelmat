@@ -67,10 +67,16 @@ def create_workout():
         abort(403)
     user_id = session["user_id"]
 
+    all_classes = workouts.get_all_classes()
+
     classes = []
     for entry in request.form.getlist("classes"):
         if entry:
             parts = entry.split(":")
+            if parts[0] not in all_classes:
+                abort(403)
+            if parts[1] not in all_classes[parts[0]]:
+                abort(403)
             classes.append((parts[0], parts[1]))
 
     workouts.add_workout(title, description, duration, user_id, classes)
@@ -120,6 +126,10 @@ def update_workout():
     for entry in request.form.getlist("classes"):
         if entry:
             parts = entry.split(":")
+            if parts[0] not in all_classes:
+                abort(403)
+            if parts[1] not in all_classes[parts[0]]:
+                abort(403)
             classes.append((parts[0], parts[1]))
 
     workouts.update_workout(workout_id, title, description, duration, classes)
