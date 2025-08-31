@@ -196,8 +196,17 @@ def create():
     username = request.form["username"]
     password1 = request.form["password1"]
     password2 = request.form["password2"]
+
+    if not username or not password1 or not password2:
+        flash("VIRHE: käyttäjätunnus ja salasana ovat pakollisia")
+        return redirect("/register")
+
     if password1 != password2:
         flash("VIRHE: salasanat eivät ole samat")
+        return redirect("/register")
+
+    if len(password1) < 8:
+        flash("VIRHE: salasanan on oltava vähintään 8 merkkiä")
         return redirect("/register")
 
     try:
