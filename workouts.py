@@ -39,8 +39,9 @@ def get_workouts():
     return db.query(sql)
 
 def get_evaluations(workout_id):
-    sql = """SELECT evaluations.evaluation, users.id, users.username
-             FROM evaluations, users
+    sql = """SELECT evaluations.evaluation, users.id AS user_id, users.username
+             FROM evaluations
+             JOIN users ON evaluations.user_id = users.id
              WHERE evaluations.workout_id = ? AND evaluations.user_id = users.id
              ORDER BY evaluations.id DESC"""
     return db.query(sql, [workout_id])
