@@ -1,24 +1,16 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Käyttäjä {{ user.username }}</title>
-</head>
+{% block title %}Käyttäjä {{ user.username }}{% endblock %}
 
-<body>
-    <h1>Käyttäjä {{ user.username }}</h1>
-    <p>
-      Käyttäjällä on yhteensä {{ workouts | count }} treeniä.
-    </p>
-    <h2>Treenit</h2>
-    <ul>
-      {% for workout in workouts %}
-      <li><a href="/workout/{{ workout.id }}">{{ workout.title }}</a></li>
-      {% endfor %}
-    </ul>
-    <p>
-        <a href="/">Takaisin</a>
-    </p>
-</body>
-
-</html>
+{% block content %}
+  <h2>Käyttäjä {{ user.username }}</h2>
+  <p>
+    Käyttäjällä on yhteensä {{ workouts | count }} treeniä.
+  </p>
+  <h3>Treenit</h3>
+  <ul>
+    {% for workout in workouts %}
+    <li><a href="/workout/{{ workout.id }}">{{ workout.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

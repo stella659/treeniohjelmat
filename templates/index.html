@@ -1,39 +1,13 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>Treeniohjelmat</title>
-</head>
+{% block title %}Treeniohjelmat{% endblock %}
 
-<body>
-    <h1>Treeniohjelmat</h1>
-    {% if session.username %}
-    <p>
-        Olet kirjautunut nimellä {{ session.username }}
-    </p>
-    <p>
-        <a href="/logout">Kirjaudu ulos</a>
-    </p>
-    <p>
-        <a href="/new_workout">Uusi treeni</a>
-    </p>
-    {% else %}
-    
-    <p>
-        <a href="/login">Kirjaudu sisään</a>
-        <a href="/register">Luo tunnus</a>
-    </p>
-    {% endif %}
-    <p>
-        <a href="/find_workout">Etsi treeni</a>
-    </p>
-    <h2>Treenit</h2>
-        <u>
-            {% for workout in workouts %}
-            <li><a href="/workout/{{ workout.id }}" > {{ workout.title }}</a></li>
-            {% endfor %}
-        </u>
+{% block content %}
+<h2>Treenit</h2>
 
-</body>
-
-</html>
+<ul>
+    {% for workout in workouts %}
+    <li><a href="/workout/{{ workout.id }}" > {{ workout.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

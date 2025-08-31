@@ -1,53 +1,45 @@
-<!DOCTYPE html>
-<html>
+{% extends "layout.html" %}
 
-<head>
-  <title>{{ workout.title }}</title>
-</head>
+{% block title %}{{ workout.title }}{% endblock %}
 
-<body>
-    <h1>{{ workout.title }}</h1>
-    {% if session.user_id == workout.user_id %}
-    <p>
-        <a href="/edit_workout/{{ workout.id }}">Muokkaa</a>
-        <a href="/remove_workout/{{ workout.id }}">Poista</a>
-    </p>
-    {% endif %}
-    <p>
-        {{ workout.description }}
-    </p>
-    <p>
-        Kesto: {{ workout.duration }} viikkoa
-    </p>
-    <p>
-        Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a>
-    </p>
-        {% if classes %}
+{% block content %}
+<h2>{{ workout.title }}</h2>
+{% if session.user_id == workout.user_id %}
+<p>
+    <a href="/edit_workout/{{ workout.id }}">Muokkaa</a>
+    <a href="/remove_workout/{{ workout.id }}">Poista</a>
+</p>
+{% endif %}
+<p>
+    {{ workout.description }}
+</p>
+<p>
+    Kesto: {{ workout.duration }} viikkoa
+</p>
+<p>
+    Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a>
+</p>
+    {% if classes %}
 
-    <p>
-        Luokat:
-        <ul>
-            {% for class in classes %}
-            <li>{{ class.title}}: {{ class.value }}</li>
-            {% endfor %}
-        </ul>
-    </p>
-    {% endif %}
-    <h2>Arviot</h2>
-    <u>
-        {% for evaluation in evaluations %}
-        <li>{{ evaluation.evaluation }}, <a href="/user/{{ evaluation.user_id }}">{{ evaluation.username }}</a></li>
+<p>
+    Luokat:
+    <ul>
+        {% for class in classes %}
+        <li>{{ class.title}}: {{ class.value }}</li>
         {% endfor %}
-    </u>
-    <h2>Uusi arvio</h2>
-    <form action="/create_evaluation" method="post">
-        <textarea name="evaluation" rows="4" cols="40" maxlength="1000" required></textarea>
-        <input type="hidden" name="workout_id" value="{{ workout.id }}" />
-        <input type="submit" value="Lähetä" />
-    </form>
-    <p>
-        <a href="/">Takaisin</a>
-    </p>
-</body>
-
-</html>
+    </ul>
+</p>
+{% endif %}
+<h3>Arviot</h3>
+<u>
+    {% for evaluation in evaluations %}
+    <li>{{ evaluation.evaluation }}, <a href="/user/{{ evaluation.user_id }}">{{ evaluation.username }}</a></li>
+    {% endfor %}
+</u>
+<h3>Uusi arvio</h3>
+<form action="/create_evaluation" method="post">
+    <textarea name="evaluation" rows="4" cols="40" maxlength="1000" required></textarea>
+    <input type="hidden" name="workout_id" value="{{ workout.id }}" />
+    <input type="submit" value="Lähetä" />
+</form>
+{% endblock %}
