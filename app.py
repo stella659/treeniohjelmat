@@ -82,7 +82,8 @@ def create_workout():
 
     workouts.add_workout(title, description, duration, user_id, classes)
 
-    return redirect("/")
+    workout_id = db.last_insert_id()
+    return redirect("/workout/" + str(workout_id))
 
 @app.route("/create_evaluation", methods=["POST"])
 def create_evaluation():
