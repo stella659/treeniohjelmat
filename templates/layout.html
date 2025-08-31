@@ -9,9 +9,9 @@
 <body>
     <h1>Treeniohjelmat</h1>
 
-    {% if session.username %}
+    {% if session.user_id %}
     <p>
-        Olet kirjautunut nimellä {{ session.username }}
+        Olet kirjautunut nimellä <a href="/user/{{ session.user_id }}">{{ session.username }}</a>
     </p>
     {% endif %}
 
@@ -26,6 +26,12 @@
         <a href="/register">Luo tunnus</a>
     {% endif %}
     </p>
+
+    {% for message in get_flashed_messages() %}
+    <div class="info">
+        {{ message }}
+    </div>
+    {% endfor %}
 
     {% block content %}{% endblock %}
 
