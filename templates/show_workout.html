@@ -9,7 +9,7 @@
     <a href="/edit_workout/{{ workout.id }}">Muokkaa</a>
     <a href="/remove_workout/{{ workout.id }}">Poista</a>
 {% endif %}
-<p>{{ workout.description }}</p>
+<p>{{ workout.description | show_lines }}</p>
 <ul>
     <li>Kesto: {{ workout.duration }} viikkoa</li>
     <li>Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a></li>
