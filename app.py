@@ -44,7 +44,8 @@ def show_workout(workout_id):
     if not workout:
         abort(404)
     classes = workouts.get_classes(workout_id)
-    return render_template("show_workout.html", workout=workout, classes=classes)
+    evaluations = workouts.get_evaluations(workout_id)
+    return render_template("show_workout.html", workout=workout, classes=classes, evaluations=evaluations)
 
 @app.route("/new_workout")
 def new_workout():
@@ -82,6 +83,20 @@ def create_workout():
     workouts.add_workout(title, description, duration, user_id, classes)
 
     return redirect("/")
+
+@app.route("/create_evaluation", methods=["POST"])
+def create_evaluation():
+    require_login()
+
+    workout_id = request.form.get('workout_id')
+    user_id = session["user_id"]
+    evaluation = request.form["evaluation"]
+    if not evaluation or len(evaluation) > 1000:
+        abort(403)
+
+    workouts.add_evaluation(workout_id, user_id, evaluation)
+
+    return redirect("/workout/" + str(workout_id))
 
 @app.route("/edit_workout/<int:workout_id>")
 def edit_workout(workout_id):

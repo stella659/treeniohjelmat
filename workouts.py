@@ -22,9 +22,26 @@ def add_workout(title, description, duration, user_id, classes):
     for title, value in classes:
         db.execute(sql, [workout_id, title, value])
 
+def add_evaluation(workout_id, user_id, evaluation):
+    print("DEBUG: Trying to add evaluation")
+    print("workout_id:", workout_id)
+    print("user_id:", user_id)
+    print("evaluation:", evaluation)
+
+    sql = """INSERT INTO evaluations (workout_id, user_id, evaluation)
+            VALUES (?, ?, ?)"""
+    db.execute(sql,[workout_id, user_id, evaluation])
+
 def get_workouts():
     sql = "SELECT id, title FROM workouts ORDER BY id DESC"
     return db.query(sql)
+
+def get_evaluations(workout_id):
+    sql = """SELECT evaluations.evaluation, users.id user_id, users.username
+            FROM evaluations, users
+            WHERE evaluations.workout_id = ? AND evaluations.user_id = users.id
+            ORDER BY evaluations.id DESC"""
+    return db.query(sql, [workout_id])
 
 def get_classes(workout_id):
     sql = "SELECT title, value FROM workout_classes WHERE workout_id = ?"

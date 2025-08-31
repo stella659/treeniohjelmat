@@ -12,6 +12,13 @@ CREATE TABLE workouts(
     user_id INTEGER REFERENCES users
 );
 
+CREATE TABLE evaluations (
+    id INTEGER REFERENCES workouts,
+    user_id INTEGER REFERENCES users,
+    workout_id INTEGER REFERENCES workouts,
+    evaluation INTEGER
+);
+
 CREATE TABLE classes(
     id INTEGER PRIMARY KEY,
     title TEXT,
