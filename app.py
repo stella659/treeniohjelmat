@@ -138,6 +138,8 @@ def update_workout():
     if not re.search("^[1-9][0-9]{0,2}$", duration):
         abort(403)
 
+    all_classes = workouts.get_all_classes()
+
     classes = []
     for entry in request.form.getlist("classes"):
         if entry:

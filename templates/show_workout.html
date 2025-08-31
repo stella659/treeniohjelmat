@@ -13,33 +13,30 @@
 <p>
     {{ workout.description }}
 </p>
-<p>
-    Kesto: {{ workout.duration }} viikkoa
-</p>
-<p>
-    Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a>
-</p>
-    {% if classes %}
-
-<p>
-    Luokat:
-    <ul>
-        {% for class in classes %}
-        <li>{{ class.title}}: {{ class.value }}</li>
-        {% endfor %}
-    </ul>
-</p>
+<ul>
+    <li>Kesto: {{ workout.duration }} viikkoa</li>
+    <li>Julkaisija: <a href="/user/{{ workout.user_id }}">{{ workout.username }}</a></li>
+</ul>
+{% if classes %}
+<h3>Luokat:</h3>
+<ul>    
+    {% for class in classes %}
+    <li>{{ class.title}}: {{ class.value }}</li>
+    {% endfor %}
 {% endif %}
+</ul>
 <h3>Arviot</h3>
-<u>
+<ul>
     {% for evaluation in evaluations %}
     <li>{{ evaluation.evaluation }}, <a href="/user/{{ evaluation.user_id }}">{{ evaluation.username }}</a></li>
     {% endfor %}
-</u>
+</ul>
+{% if session.user_id %}
 <h3>Uusi arvio</h3>
 <form action="/create_evaluation" method="post">
     <textarea name="evaluation" rows="4" cols="40" maxlength="1000" required></textarea>
     <input type="hidden" name="workout_id" value="{{ workout.id }}" />
     <input type="submit" value="Lähetä" />
 </form>
+{% endif %}
 {% endblock %}
